@@ -1,2 +1,2 @@
-#!/bin/bash
-file -C -m school.gmc
+\n0 string SCHOOL School data \n::mine School
+file -C -m School.mgc
