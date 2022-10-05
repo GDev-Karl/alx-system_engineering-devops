@@ -1,0 +1,1 @@
+the script print a path of the directory 0x00-shell_basics
