@@ -1,1 +1,1 @@
-print path of a working directory
+all about shell
