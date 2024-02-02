@@ -1,6 +1,12 @@
-#!/usr/bin/env bash
-# Configures an Nginx server to listen on port 80.
+#!/bin/bash
+# This will Stop any process that is using port 80 on the host machine
+sudo kill $(sudo lsof -t -i :80)
 
-rm /etc/nginx/sites-enabled/default
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx restart
+docker pull nginx
+docker run --name docker-nginx -p 80:80 -d nginx
+
+CONTAINER_ID=$(docker ps -aqf "name=docker-nginx")
+
+docker exec $CONTAINER_ID setcap cap_net_bind_service=+ep /usr/local/nginx/sbin/nginx
+docker exec $CONTAINER_ID sed -i 's/listen 80 default_server;/listen *:80 default_server;/g' /etc/nginx/conf.d/default.conf
+docker exec $CONTAINER_ID nginx -s reload
