@@ -1,11 +1,1 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Example</title>
-</head>
-<body>
-    <img src="img/web_setup.png" alt="Description de votre image">
-</body>
-</html>
+![illustrating the flow of the request created when you type https://www.google.com](img/web_setup.png)
