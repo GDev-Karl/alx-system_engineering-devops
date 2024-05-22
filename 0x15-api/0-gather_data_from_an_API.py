@@ -4,19 +4,27 @@ import sys
 
 
 def main(employee_id):
+    """
+    Retrieves data from the given API endpoint and prints a message
+    with the employee's name, the number of tasks completed,
+    and the total number of tasks
+    """
 
-    employee_url = "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
-    tasks_url = "https://jsonplaceholder.typicode.com/todos?userId={}".format(employee_id)
+    employee_url = "https://jsonplaceholder.typicode.com/users/{}"\
+        .format(employee_id)
+    tasks_url = "https://jsonplaceholder.typicode.com/todos?userId={}"\
+        .format(employee_id)
 
-    employee = requests.get(employee_url).json()
-    tasks = requests.get(tasks_url).json()
+    employee_data = requests.get(employee_url).json()
+    tasks_data = requests.get(tasks_url).json()
 
-    completed_tasks = []
-    for task in tasks:
-        if task.get("completed") is True:
-            completed_tasks.append(task.get("title"))
+    completed_tasks = [task["title"] for task in tasks_data
+                       if task["completed"]]
 
-    print("Employee {} is done with tasks({}/{}):".format(employee.get("name"), len(completed_tasks), len(tasks)))
+    print(
+        "Employee {} is done with tasks({}/{})".format(
+            employee_data["name"], len(completed_tasks), len(tasks_data)
+        ))
     for task in completed_tasks:
         print("\t {}".format(task))
 
